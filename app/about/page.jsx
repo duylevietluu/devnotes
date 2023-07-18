@@ -3,7 +3,7 @@
 const AboutPage = () => {
   return (
     <>
-        <h1>Welcome to DevNotes!</h1>
+        <h1 className="text-center">Welcome!</h1>
         <div className="flex flex-row justify-center">
           <button className="btn-blue" >
             <a href="https://github.com/duylevietluu/devnotes" target="blank">

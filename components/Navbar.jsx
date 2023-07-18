@@ -16,7 +16,7 @@ const Navbar = () => {
             <button className="btn-logo">NOTE</button>
           </Link>
         </li>
-        <li>
+        <li className="">
           <Link href='/about' className="mx-auto font-bold text-xl text-blue-800 hover:text-blue-500">ABOUT</Link>
         </li>
         {

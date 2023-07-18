@@ -2,8 +2,6 @@
 import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
-import { ContextProvider, UserContext } from '@/lib/context';
-import { useUserData } from '@/lib/hook';
 import Provider from '@/components/Provider';
 
 const title = 'Dev Notes';
