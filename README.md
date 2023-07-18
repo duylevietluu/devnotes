@@ -8,6 +8,9 @@ The project is built using the following technologies:
 - Backend: Firebase
 - Deployment: Vercel
 
+## Live Demo
+See it at this [Vercel deployment](https://devnotes-two.vercel.app/)
+
 ## Features
 
 DevNotes currently supports the following features:
@@ -29,7 +32,7 @@ Navigate to the project directory:
 ```bash
 cd devnotes
 ```
-Set up Firebase configuration:
+2. Set up Firebase configuration:
 
 - Create a new Firebase project and obtain the Firebase configuration details.
 - Create a .env.local file in the project root and add your Firebase configuration:
@@ -42,13 +45,13 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-messaging-sender-id
 NEXT_PUBLIC_FIREBASE_APP_ID=your-app-id
 ```
 
-Start the development server:
+3. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open your browser and visit http://localhost:3000 to view the application.
+4. Open your browser and visit http://localhost:3000 to view the application.
 
 ## Special thanks
 
