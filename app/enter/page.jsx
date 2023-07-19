@@ -6,6 +6,7 @@ import { signInAnonymously, signInWithPopup, signOut } from "firebase/auth";
 import { useCallback, useContext, useEffect, useState } from "react";
 import debounce from 'lodash.debounce';
 import { doc, getDoc, writeBatch } from "firebase/firestore";
+import { revalidateUser } from "@/lib/revalidate";
 
 const SignInButton = () => {
   const signInWithGoogle = async () => {
@@ -45,6 +46,7 @@ const UsernameForm = () => {
     batch.set(usernameDocRef, { uid: user.uid });
 
     await batch.commit();
+    await revalidateUser(formValue);
   };
 
   const onChange = (e) => {

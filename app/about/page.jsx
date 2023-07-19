@@ -1,5 +1,9 @@
 'use static';
 
+export const metadata = {
+  title: 'About - Dev Notes',
+}
+
 const AboutPage = () => {
   return (
     <>

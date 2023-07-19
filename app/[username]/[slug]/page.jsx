@@ -8,6 +8,14 @@ import HeartButton from "@/components/HeartButton";
 
 export const revalidate = 5000; // revalidate every 5000 seconds
 
+export function generateMetadata({ params }) {
+  const { username, slug } = params;
+  const title = `${username} - ${slug}`.slice(0, 60);
+  return {
+    title,
+  }
+}
+
 const PostPage = async({ params }) => {
   const { username, slug } = params;
   const userDoc = await getUserWithUsername(username);

@@ -4,6 +4,15 @@ import { getUserWithUsername, postToJSON } from "@/lib/firebase";
 import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { notFound } from 'next/navigation';
 
+export function generateMetadata({ params }) {
+  // read route params
+  const username = params.username;
+ 
+  return {
+    title: `${username} - Dev Notes`,
+  }
+}
+
 const UserPage = async({params}) => {
   const {username} = params;
   const userDoc = await getUserWithUsername(username);

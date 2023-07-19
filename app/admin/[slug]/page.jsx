@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import ReactMarkdown from 'react-markdown';
 import ImageUploader from "@/components/ImageUploader";
+import { revalidatePost } from "@/lib/revalidate";
 
 const AdminPostEdit = ({params}) => {
   return (
@@ -25,21 +26,20 @@ const PostManager = ({ slug }) => {
   const postRef = doc(firestore,'users',auth.currentUser.uid,'posts',slug);
   // take data from postref
   const [post] = useDocumentDataOnce(postRef);
-  const postPath = post && `/${post.username}/${post.slug}`;
   return (
     post && (
     <div className="container">
       <section>
         <h1>{post.title}</h1>
         <p>ID: {post.slug}</p>
-        <PostForm postRef={postRef} defaultValues={post} preview={preview} postPath={postPath} />
+        <PostForm postRef={postRef} defaultValues={post} preview={preview} />
       </section>
       <aside>
         <h3>Tools</h3>
         <button onClick={() => setPreview(!preview)} className="w-full">
           {preview ? 'Edit' : 'Preview'}
         </button>
-        <Link href={postPath}>
+        <Link href={`/${post.username}/${post.slug}`} prefetch={false}>
           <button className="btn-blue w-full">Live view</button>
         </Link>
       </aside>
@@ -47,21 +47,20 @@ const PostManager = ({ slug }) => {
   )
 }
 
-const PostForm = ({ postRef, defaultValues, preview, postPath }) => {
+const PostForm = ({ postRef, defaultValues, preview }) => {
   const { register, handleSubmit, reset, watch, formState } = useForm({ defaultValues, mode: 'onChange' });
   const { isValid, isDirty, errors } = formState;
 
   const updatePost = async({ content, published }) => {
+    const { username, slug } = defaultValues;
     await updateDoc(postRef, {
       content,
       published,
       updatedAt: serverTimestamp(),
     });
     reset({ content, published });
-    const nice = await fetch('/api/revalidate', {
-      method: 'POST',
-      body: JSON.stringify({ path: postPath })
-    });
+    await revalidatePost(username, slug);
+
     //console.log(nice.text())
     toast.success("Post is updated succesfully");
   }

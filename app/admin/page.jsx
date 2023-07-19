@@ -11,6 +11,7 @@ import { useContext, useState } from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { serverTimestamp } from "firebase/firestore";
 import { toast } from "react-hot-toast";
+import { revalidatePost } from "@/lib/revalidate";
 
 const AdminPostsPage = () => {
   return (
@@ -49,6 +50,7 @@ const CreateNewPost = () => {
     await setDoc(ref, data);
     toast.success('Post created!');
     router.push(`admin/${slug}`);
+    await revalidatePost(username, slug);
   }
 
   return (
